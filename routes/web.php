@@ -1,6 +1,8 @@
 <?php
 
+// Mengimpor class Route dari Illuminate\Support\Facades dan ItemController dari App\Http\Controllers
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Mendefinisikan rute GET untuk URL root (/) yang mengembalikan view 'welcome'
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Mendefinisikan resource controller untuk 'items' yang menghubungkan semua metode di ItemController
+Route::resource('items', ItemController::class);

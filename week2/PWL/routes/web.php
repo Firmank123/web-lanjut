@@ -6,6 +6,8 @@ use App\Http\Controllers\ArticleContoller;
 use App\Http\Controllers\AboutContoller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
+
 
 // Route::get('/', [PageController::class, 'index']);
 // Route::get('/about', [PageController::class, 'about']);
@@ -72,3 +74,17 @@ Route::get('/user/{name?}', function ($name = 'John') {
 
 // // Generating Redirects...
 // return redirect()->route('profile');
+
+Route::resource('photos', PhotoController::class);
+
+Route::resource('photos', PhotoController::class)->only([
+    'index',
+    'show'
+]);
+
+Route::resource('photos', PhotoController::class)->except([
+    'create',
+    'store',
+    'update',
+    'destroy'
+]);

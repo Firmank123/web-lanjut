@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\UserModel;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -72,7 +72,7 @@ class UserController extends Controller
 
         // $user = UserModel::all();
 
-        $user = UserModel::with('level')->get();
+        $user = User::with('level')->get();
         return view('user', ['data' => $user]);
     }
     //  public function tambah()

@@ -21,11 +21,18 @@ Route::get('/', function () {
 });
 
 Route::get('/level', [LevelController::class, 'index']);
-Route::get('/kategori', [KategoriController::class, 'index']);
-Route::get('/user', [UserController::class, 'index']);
-Route::get('/user/tambah', [UserController::class, 'tambah']);
-Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
-Route::get('/user/ubah/{id}', [UserController::class, 'edit']);
-Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
-Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
-Route::get('/kategori', [KategoriController::class, 'index']);
+
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('/tambah', [UserController::class, 'tambah']);
+    Route::post('/tambah_simpan', [UserController::class, 'tambah_simpan']);
+    Route::get('/ubah/{id}', [UserController::class, 'edit']);
+    Route::put('/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+    Route::get('/hapus/{id}', [UserController::class, 'hapus']);
+});
+
+Route::prefix('kategori')->group(function () {
+    Route::get('/', [KategoriController::class, 'index']);
+    Route::get('/create', [KategoriController::class, 'create']);
+    Route::post('/', [KategoriController::class, 'store']);
+});

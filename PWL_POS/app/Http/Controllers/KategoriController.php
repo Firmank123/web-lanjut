@@ -10,7 +10,8 @@ use App\Models\Kategori;
 class KategoriController extends Controller
 {
 
-    public function index(KategoriDataTable $dataTable){        // $data =[
+    public function index(KategoriDataTable $dataTable)
+    {        // $data =[
         //     'kategori_kode' =>'SNK',
         //     'kategori_nama' =>'Snack/Makanan Ringan',
         //     'created_at' => now()
@@ -29,17 +30,47 @@ class KategoriController extends Controller
     }
 
     public function create()
-     {
-         return view('kategori.create');
-     }
+    {
+        return view('kategori.create');
+    }
 
-     public function store(Request $request)
-     {
-         Kategori::create([
-             'kategori_kode' => $request->kategori_kode,
-             'kategori_nama' => $request->kategori_nama,
-             'created_at' => now()
-         ]);
-         return redirect('kategori')->with('status', 'Data berhasil ditambahkan');
-     }
+    public function store(Request $request)
+    {
+        Kategori::create([
+            'kategori_kode' => $request->kategori_kode,
+            'kategori_nama' => $request->kategori_nama,
+            'created_at' => now()
+        ]);
+        return redirect('kategori')->with('status', 'Data berhasil ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $kategori = Kategori::findOrFail($id);
+        return view('kategori.edit', compact('kategori'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'kategori_kode' => 'required|string|max:10|unique:m_kategori,kategori_kode,' . $id . ',kategori_id',
+            'kategori_nama' => 'required|string|max:100',
+        ]);
+
+        $kategori = Kategori::findOrFail($id);
+        $kategori->update([
+            'kategori_kode' => $request->kategori_kode,
+            'kategori_nama' => $request->kategori_nama,
+        ]);
+
+        return redirect()->route('kategori.index')->with('status', 'Data berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $kategori = Kategori::findOrFail($id); // Find the kategori by ID or throw a 404 error
+        $kategori->delete(); // Delete the kategori
+
+        return redirect()->route('kategori.index')->with('status', 'Data berhasil dihapus');
+    }
 }

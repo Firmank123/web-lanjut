@@ -32,7 +32,9 @@ Route::prefix('user')->group(function () {
 });
 
 Route::prefix('kategori')->group(function () {
-    Route::get('/', [KategoriController::class, 'index']);
-    Route::get('/create', [KategoriController::class, 'create']);
-    Route::post('/', [KategoriController::class, 'store']);
-});
+    Route::get('/', [KategoriController::class, 'index'])->name('kategori.index');
+     Route::get('/create', [KategoriController::class, 'create'])->name('kategori.create');
+     Route::post('/', [KategoriController::class, 'store'])->name('kategori.store');
+     Route::get('/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
+     Route::put('/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+     Route::delete('/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');});

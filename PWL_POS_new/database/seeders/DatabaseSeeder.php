@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             StockSeeder::class,
             PenjualanSeeder::class,
             PenjualanDetaiSeeder::class,
+            SupplierSeeder::class,
         ]);
     }
 }

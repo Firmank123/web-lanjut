@@ -6,6 +6,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +18,7 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index']);
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
@@ -27,11 +26,15 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index']);
-    Route::get('/tambah', [UserController::class, 'tambah']);
-    Route::post('/tambah_simpan', [UserController::class, 'tambah_simpan']);
-    Route::get('/ubah/{id}', [UserController::class, 'edit']);
-    Route::put('/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
-    Route::get('/hapus/{id}', [UserController::class, 'hapus']);
+    Route::get('/list', [UserController::class, 'list']);
+    Route::get('/create', [UserController::class, 'create']);
+    Route::post('/', [UserController::class,'store']); // Add this line to handle POST to /user
+    Route::post('/store', [UserController::class,'store']); // Keep this for backward compatibility
+    Route::get('/show/{id}', [UserController::class,'show']);
+    Route::get('/edit/{id}', [UserController::class,'edit']);
+    Route::put('/update/{id}', [UserController::class,'update']);
+    Route::delete('/delete/{id}', [UserController::class,'delete']); 
+
 });
 
 Route::get('/welcome', [WelcomeController::class, 'index']);

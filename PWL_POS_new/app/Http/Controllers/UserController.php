@@ -139,7 +139,8 @@ class UserController extends Controller
 
         ];
         $activeMenu = 'user';
-        return view('user.index', compact('breadcrumb', 'page', 'activeMenu'));
+        $levels = LevelModel::all(); // mengambil semua data level
+        return view('user.index', compact('breadcrumb', 'page', 'activeMenu', 'levels'));
     }
     public function list(Request $request)
     {

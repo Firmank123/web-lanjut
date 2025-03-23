@@ -12,6 +12,22 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label">Filter: </label>
+                        <div class="col-3">
+                            <select class="form-control" id="level_id" name="level_id" required>
+                                <option value="">- Semua </option>
+                                @foreach ($levels as $item)
+                                    <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
+                                @endforeach
+                            </select>
+                            <small class="form-text text-muted">Level Pengguna</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="mb-3 d-flex justify-content-between align-items-center">
                 <a href="{{ url('user/create') }}" class="btn btn-success btn-md animate__animated animate__fadeIn">
                     <i class="fas fa-plus-circle mr-1"></i> Tambah User Baru
@@ -54,7 +70,10 @@
                 ajax: {
                     "url": "{{ url('user/list') }}",
                     "dataType": "json",
-                    "type": "GET"
+                    "type": "GET",
+                    "data": function(d) {
+                        d.level_id = $('#level_id').val();
+                    }
                 },
                 columns: [{
                     data: "user_id",
@@ -116,6 +135,11 @@
 
             // Hide default search box
             $('.dataTables_filter').hide();
+
+            // Change level filter on select change
+            $('#level_id').on('change', function() {
+                dataUser.draw();
+            });
         });
     </script>
 @endpush

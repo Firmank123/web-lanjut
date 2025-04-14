@@ -49,6 +49,7 @@ Route::prefix('user')->group(function () {
     
 
 });
+Route::middleware(['authorize:ADM,MNG'])->group(function () {
 Route::prefix('barang')->group(function () {
     Route::get('/', [BarangController::class, 'index']);
     Route::get('/list', [BarangController::class, 'list']);
@@ -67,6 +68,7 @@ Route::prefix('barang')->group(function () {
     Route::get('/{id}/delete_ajax', [BarangController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
     Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
+});
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [WelcomeController::class, 'index']);

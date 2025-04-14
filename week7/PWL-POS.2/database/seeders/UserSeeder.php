@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         DB::table('m_user')->insert([
             'nama' => 'Administrator',
             'username' => 'admin@localhost',
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('admin12345'),
             'level_id' => 1,
         ]);
 
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         DB::table('m_user')->insert([
             'nama' => 'Kasir',
             'username' => 'kasir@localhost',
-            'password' => Hash::make('kasir'),
+            'password' => Hash::make('kasir12345'),
             'level_id' => 3,
         ]);
     }

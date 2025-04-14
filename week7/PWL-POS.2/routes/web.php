@@ -68,6 +68,9 @@ Route::prefix('barang')->group(function () {
     Route::delete('/{id}/delete_ajax', [BarangController::class, 'delete_ajax']);
     Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
 });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [WelcomeController::class, 'index']);
+Route::middleware(['authorize:ADM'])->group(function () {
 Route::prefix('level')->group(function () {
     
     Route::get('/', [LevelController::class, 'index']);
@@ -86,7 +89,8 @@ Route::prefix('level')->group(function () {
     Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
     Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
-
+});
+});
 });
 Route::prefix('kategori')->group(function () {
     Route::get('/', [KategoriController::class, 'index']);
@@ -137,5 +141,3 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/welcome', [WelcomeController::class, 'index']);

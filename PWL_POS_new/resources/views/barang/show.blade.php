@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <h4 class="font-weight-bold mb-1">{{ $barang->barang_nama }}</h4>
-                            <span class="badge badge-info px-3 py-2">{{ $barang->kategori->kategori_nama }}</span>
+                            <span class="badge badge-info px-3 py-2">{{ $barang->kategori->kategori_kode}}</span>
                         </div>
                         <div class="col-md-9">
                             <div class="user-info-card">

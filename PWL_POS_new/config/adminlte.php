@@ -327,6 +327,60 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Dashboard',
+            'url'  => 'home',
+            'icon' => 'fas fa-tachometer-alt',
+        ],
+        [
+            'text' => 'Kategori',
+            'url'  => 'kategori',
+            'icon' => 'fas fa-list',
+            'active' => ['kategori', 'kategori/*'],
+        ],
+        //level
+        [
+            'text' => 'Level',
+            'url'  => 'level',
+            'icon' => 'fas fa-layer-group',
+            'active' => ['level', 'level/*'],
+        ],
+        //user
+        [
+            'text' => 'User',
+            'url'  => 'user',
+            'icon' => 'fas fa-user',
+            'active' => ['user', 'user/*'],
+        ],
+        //barang
+        [
+            'text' => 'Barang',
+            'url'  => 'barang',
+            'icon' => 'fas fa-boxes',
+            'active' => ['barang', 'barang/*'],
+        ],
+
+        //stok
+        [
+            'text' => 'Stock',
+            'url'  => 'stock',
+            'icon' => 'fas fa-box',
+            'active' => ['stock', 'stock/*'],
+        ],
+        //penjualan
+        [
+            'text' => 'Penjualan',
+            'url'  => 'penjualan',
+            'icon' => 'fas fa-shopping-cart',
+            'active' => ['penjualan', 'penjualan/*'],
+        ],
+        //penjualan detail
+        [
+            'text' => 'Penjualan Detail',
+            'url'  => 'penjualan_detail',
+            'icon' => 'fas fa-shopping-cart',
+            'active' => ['penjualan_detail', 'penjualan_detail/*'],
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

@@ -17,6 +17,8 @@
                 <a href="{{ url('supplier/create') }}" class="btn btn-success btn-md animate__animated animate__fadeIn">
                     <i class="fas fa-plus-circle mr-1"></i> Tambah Supplier Baru
                 </a>
+                <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')"
+                    class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
                 <div class="form-group has-search mb-0">
                     <span class="fa fa-search form-control-feedback"></span>
                     <input type="text" class="form-control" id="searchBox" placeholder="Cari supplier...">
@@ -31,9 +33,12 @@
                             <th class="border-top-0">Kode</th>
                             <th class="border-top-0">Nama Supplier</th>
                             <th class="border-top-0">Kontak</th>
+                            <th class="border-top-0">Alamat</th>
                             <th class="border-top-0">Email</th>
                             <th class="border-top-0">Status</th>
+                            <th class="border-top-0">Keterangan</th>
                             <th class="border-top-0 text-center">Aksi</th>
+                            <th class="border-top-0 text-center">Ajax</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,13 +48,21 @@
             </div>
         </div>
     </div>
+    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data backdrop="static"
+        data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
 
 @push('js')
     <script>
+        function modalAction(url = '') {
+            $('#myModal').load(url, function() {
+                $('#myModal').modal('show');
+            });
+        }
+        var dataSupplier
         $(document).ready(function() {
             // Initialize DataTable
-            var dataSupplier = $('#table_supplier').DataTable({
+            dataSupplier = $('#table_supplier').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
@@ -77,7 +90,17 @@
                     className: "",
                     orderable: false,
                     searchable: true
-                }, {
+                }, 
+                {
+                    data: "supplier_alamat",
+                    className: "",
+                    orderable: false,
+                    searchable: true,
+                    render: function(data) {
+                        return data ? data : '<i class="text-muted">Tidak ada</i>';
+                    }
+                }, 
+                {
                     data: "supplier_email",
                     className: "",
                     orderable: false,
@@ -86,12 +109,30 @@
                         return data ? data : '<i class="text-muted">Tidak ada</i>';
                     }
                 }, {
-                    data: "status_badge",
+                    data: "supplier_aktif",
                     className: "text-center",
                     orderable: false,
                     searchable: false
-                }, {
+                }, 
+                {
+                    data: "supplier_keterangan",
+                    className: "",
+                    orderable: false,
+                    searchable: true,
+                    render: function(data) {
+                        return data ? data : '<i class="text-muted">Tidak ada</i>';
+                    }
+                }, 
+                {
                     data: "aksi",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false,
+                    render: function(data) {
+                        return data;
+                    }
+                }, {
+                    data: "AJAX",
                     className: "text-center",
                     orderable: false,
                     searchable: false,

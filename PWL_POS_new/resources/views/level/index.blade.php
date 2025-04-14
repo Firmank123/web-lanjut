@@ -16,6 +16,8 @@
                 <a href="{{ url('level/create') }}" class="btn btn-success btn-md">
                     <i class="fas fa-plus-circle mr-1"></i> Tambah Level Baru
                 </a>
+                <button onclick="modalAction('{{ url('/level/create_ajax') }}')"
+                    class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
                 <div class="form-group has-search mb-0">
                     <span class="fa fa-search form-control-feedback"></span>
                     <input type="text" class="form-control" id="searchBox" placeholder="Cari level...">
@@ -30,6 +32,7 @@
                             <th class="border-top-0">Kode Level</th>
                             <th class="border-top-0">Nama Level</th>
                             <th class="border-top-0 text-center">Aksi</th>
+                            <th class="border-top-0 text-center">Ajax</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,13 +42,21 @@
             </div>
         </div>
     </div>
+    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data backdrop="static"
+        data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
 
 @push('js')
     <script>
+        function modalAction(url = '') {
+            $('#myModal').load(url, function() {
+                $('#myModal').modal('show');
+            });
+        }
+        var dataLevel
         $(document).ready(function() {
             // Initialize DataTable
-            var dataLevel = $('#table_level').DataTable({
+            dataLevel = $('#table_level').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
@@ -70,6 +81,14 @@
                     searchable: true
                 }, {
                     data: "aksi",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false,
+                    render: function(data) {
+                        return data;
+                    }
+                }, {
+                    data: "AJAX",
                     className: "text-center",
                     orderable: false,
                     searchable: false,

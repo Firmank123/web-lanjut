@@ -57,7 +57,7 @@
                                         <i class="fas fa-boxes text-warning"></i>
                                         <span>Jumlah Barang</span>
                                     </div>
-                                    <div class="info-value">{{ count($kategori->barangs) }} barang</div>
+                                    <div class="info-value">{{ count($kategori->barang) }} barang</div>
                                 </div>
                             </div>
                         </div>

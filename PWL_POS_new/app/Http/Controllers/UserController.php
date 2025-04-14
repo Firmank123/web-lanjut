@@ -104,6 +104,13 @@ class UserController extends Controller
         $activeMenu = 'user';
         return view('user.show', compact('breadcrumb', 'page', 'activeMenu', 'user'));
     }
+    public function show_ajax($id)
+    {
+        $user = UserModel::find($id);
+        $level = Level::select('level_id', 'level_nama')->get();
+
+        return view('user.show_ajax', ['user' => $user, 'level' => $level]);
+    }
 
     public function edit($id)
     {

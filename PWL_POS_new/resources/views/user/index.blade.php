@@ -49,7 +49,7 @@
                             <th class="border-top-0">Nama</th>
                             <th class="border-top-0">Level Pengguna</th>
                             <th class="border-top-0 text-center">Aksi</th>
-                            <th class="border-top-0 text-center">AJAX</th>
+                            <th class="border-top-0 text-center">Ajax</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,10 +72,10 @@
                 $('#myModal').modal('show');
             });
         }
-        var dataUser;
+        var dataUser
         $(document).ready(function() {
             // Initialize DataTable
-             dataUser = $('#table_user').DataTable({
+            dataUser = $('#table_user').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
@@ -86,7 +86,6 @@
                         d.level_id = $('#level_id').val();
                     }
                 },
-                
                 columns: [{
                     data: "user_id",
                     className: "text-center",
@@ -118,7 +117,6 @@
                     render: function(data) {
                         return data;
                     }
-                    
                 }, {
                     data: "AJAX",
                     className: "text-center",
@@ -127,10 +125,7 @@
                     render: function(data) {
                         return data;
                     }
-                    
                 }],
-                
-
                 language: {
                     processing: '<div class="spinner-border text-primary" role="status"></div>',
                     search: "",
@@ -164,7 +159,6 @@
             $('#level_id').on('change', function() {
                 dataUser.draw();
             });
-            
         });
     </script>
 @endpush

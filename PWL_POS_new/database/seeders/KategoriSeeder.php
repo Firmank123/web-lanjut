@@ -14,25 +14,25 @@ class KategoriSeeder extends Seeder
     public function run(): void
     {
         DB::table('m_kategori')->insert([
-            'kategori_kode' => 'MKN',
-            'kategori_nama' => 'Makanan',
+            'kategori_kode' => 'AT',
+            'kategori_nama' => 'Alat Tulis',
         ]);
 
         DB::table('m_kategori')->insert([
-            'kategori_kode' => 'MNM',
-            'kategori_nama' => 'Minuman',
+            'kategori_kode' => 'AM',
+            'kategori_nama' => 'Alat makan',
         ]);
         DB::table('m_kategori')->insert([
-            'kategori_kode' => 'DRK',
-            'kategori_nama' => 'Dessert',
+            'kategori_kode' => 'HC',
+            'kategori_nama' => 'Healt Care',
         ]);
         DB::table('m_kategori')->insert([
-            'kategori_kode' => 'LKS',
+            'kategori_kode' => 'LL',
             'kategori_nama' => 'Lain-lain',
         ]);
         DB::table('m_kategori')->insert([
-            'kategori_kode' => 'BHS',
-            'kategori_nama' => 'Bahan Baku',
+            'kategori_kode' => 'BC',
+            'kategori_nama' => 'Body Care',
         ]);
     }
 }

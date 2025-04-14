@@ -28,7 +28,9 @@ Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [WelcomeController::class, 'index']);
+Route::middleware(['authorize:ADM'])->group(function () {
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::get('/list', [UserController::class, 'list']);
@@ -48,6 +50,8 @@ Route::prefix('user')->group(function () {
     Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
     
 
+});
+});
 });
 Route::middleware(['authorize:ADM,MNG'])->group(function () {
 Route::prefix('barang')->group(function () {
@@ -70,6 +74,8 @@ Route::prefix('barang')->group(function () {
     Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
     Route::get('/import', [BarangController::class, 'import']); // ajax form upload excel
     Route::post('/import_ajax', [BarangController::class, 'import_ajax']); // ajax import excel
+    Route::get('/export_excel', [BarangController::class, 'export_excel']); // export excel
+    Route::get('/export_pdf', [BarangController::class, 'export_pdf']); // export pdf
 });
 });
 Route::middleware(['auth'])->group(function () {

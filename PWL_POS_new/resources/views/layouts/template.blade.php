@@ -63,7 +63,6 @@
         .btn-success {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             border: none;
-            border-radius: 20px;
             padding: 8px 20px;
             box-shadow: 0 4px 6px rgba(32, 201, 151, 0.25);
             transition: all 0.3s ease;

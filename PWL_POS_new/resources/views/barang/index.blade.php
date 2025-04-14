@@ -28,13 +28,14 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-3 d-flex justify-content-between align-items-center">
-                <a href="{{ url('barang/create') }}" class="btn btn-success btn-md animate__animated animate__fadeIn">
-                    <i class="fas fa-plus-circle mr-1"></i> Tambah Barang Baru
-                </a>
+            <div class="mb-3 d-flex justify-content-end align-items-center">
+                <a href="{{ url('/barang/export_excel') }}" class="btn btn-primary mr-2"><i class="fa fa-file
+                    excel"></i> Export Barang</a> 
                 <button onclick="modalAction('{{ url('/barang/create_ajax') }}')"
-                    class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
-                <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-info">Import Barang</button>
+                    class="btn btn-sm btn-success mr-2">Tambah Ajax</button>
+                <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-info mr-2">Import Barang</button>
+                <a href="{{ url('/barang/export_pdf') }}" class="btn btn-warning mr-2"><i class="fa fa-file
+                    pdf"></i> Export Barang</a> 
                 <div class="form-group has-search mb-0">
                     <span class="fa fa-search form-control-feedback"></span>
                     <input type="text" class="form-control" id="searchBox" placeholder="Cari barang...">

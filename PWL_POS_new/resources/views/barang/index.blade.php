@@ -34,6 +34,7 @@
                 </a>
                 <button onclick="modalAction('{{ url('/barang/create_ajax') }}')"
                     class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+                <button onclick="modalAction('{{ url('/barang/import') }}')" class="btn btn-info">Import Barang</button>
                 <div class="form-group has-search mb-0">
                     <span class="fa fa-search form-control-feedback"></span>
                     <input type="text" class="form-control" id="searchBox" placeholder="Cari barang...">

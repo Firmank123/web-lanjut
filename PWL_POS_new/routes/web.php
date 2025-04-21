@@ -8,6 +8,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StockController;
+use App\Http\Controllers\PenjualanController;
+
 
 
 
@@ -40,7 +43,7 @@ Route::prefix('user')->group(function () {
     Route::get('/show/{id}', [UserController::class,'show']);
     Route::get('/edit/{id}', [UserController::class,'edit']);
     Route::put('/update/{id}', [UserController::class,'update']);
-    Route::delete('/delete/{id}', [UserController::class,'delete']); 
+    Route::delete('/delete/{id}', [UserController::class,'delete']);
     Route::get('/create_ajax', [UserController::class, 'create_ajax']);
     Route::post('/ajax', [UserController::class, 'store_ajax']); //
     Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']);
@@ -48,7 +51,7 @@ Route::prefix('user')->group(function () {
     Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']);
     Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
-    
+
 
 });
 });
@@ -82,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [WelcomeController::class, 'index']);
 Route::middleware(['authorize:ADM'])->group(function () {
 Route::prefix('level')->group(function () {
-    
+
     Route::get('/', [LevelController::class, 'index']);
     Route::get('/list', [LevelController::class, 'list']);
     Route::get('/create', [LevelController::class, 'create']);
@@ -138,6 +141,31 @@ Route::prefix('supplier')->group(function () {
     Route::get('/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']);
     Route::get('/{id}/show_ajax', [SupplierController::class, 'show_ajax']);
+});
+
+Route::prefix('stok')->middleware(['authorize:ADM,MNG'])->group(function () {
+    Route::get('/', [StockController::class, 'index']);
+    Route::get('/list', [StockController::class, 'list']);
+    Route::post('/', [StockController::class, 'store']);
+    Route::get('/{id}', [StockController::class, 'show']);
+    Route::get('/{id}/edit', [StockController::class, 'edit']);
+    Route::put('/{id}', [StockController::class, 'update']);
+    Route::delete('/{id}', [StockController::class, 'destroy']);
+    Route::get('/export_excel', [StockController::class, 'export_excel']);
+    Route::get('/export_pdf', [StockController::class, 'export_pdf']);
+    Route::get('/show_allBarang', [StockController::class, 'showAllBarang']);
+});
+
+Route::prefix('penjualan')->middleware(['authorize:ADM,MNG,KAS'])->group(function () {
+    Route::get('/', [PenjualanController::class, 'index']);
+    Route::get('/list', [PenjualanController::class, 'list']);
+    Route::get('/create', [PenjualanController::class, 'create']);
+    Route::post('/', [PenjualanController::class, 'store']);
+    Route::get('/{id}', [PenjualanController::class, 'show'])->where('id', '[0-9]+');
+    Route::get('/{id}/pdf', [PenjualanController::class, 'generatePdf'])->where('id', '[0-9]+');
+    Route::get('/export_excel', [PenjualanController::class, 'export_excel']);
+    Route::get('/export_pdf', [PenjualanController::class, 'export_pdf']);
+    Route::get('/barang/{id}', [PenjualanController::class, 'getBarangInfo'])->where('id', '[0-9]+');
 });
 
 Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
